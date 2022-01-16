@@ -70,11 +70,23 @@ const Home = (props) => {
             label="Questions"
             type="number"
             value={questionsCount}
-            onChange={(e) => setQuestionsCount(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value < 1) {
+                setNumberRange(1);
+              } else {
+                setQuestionsCount(e.target.value);
+              }
+            }}
           />
         </FormControl>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <h4>Range of Operands:</h4>
         <FormControl sx={{ m: 1, width: 115 }} style={{ color: "white" }}>
           <TextField
@@ -94,7 +106,13 @@ const Home = (props) => {
             label="Upper"
             type="number"
             value={numberRange}
-            onChange={(e) => setNumberRange(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value < 1) {
+                setNumberRange(1);
+              } else {
+                setNumberRange(e.target.value);
+              }
+            }}
           />
         </FormControl>
       </div>

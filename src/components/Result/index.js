@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 
 const Result = ({ questions, handleRestart }) => {
+  const [result, setResult] = useState(0);
+
+  useEffect(() => {
+    let correct = 0;
+    for (let question of questions) {
+      if (
+        question.answer &&
+        parseFloat(question.answer) === question.actualAnswer
+      ) {
+        correct += 1;
+      }
+      setResult((correct / questions.length) * 100);
+    }
+  }, [questions]);
+
   return (
     <div>
       <div
@@ -10,7 +25,7 @@ const Result = ({ questions, handleRestart }) => {
           alignItems: "center",
         }}
       >
-        <h3>You scored 20%</h3>
+        <h3>You scored {result}%</h3>
       </div>
       {questions &&
         questions.length > 0 &&
